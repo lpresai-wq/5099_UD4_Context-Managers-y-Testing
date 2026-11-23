@@ -27,21 +27,85 @@ Debe aparecer la versión de Python instalada. Se recomienda **Python 3.10 o sup
 
 > En Windows, si `python` no funciona, puede utilizarse `py`. En macOS o Linux, si es necesario, sustituir `python` por `python3` en los comandos.
 
-### Paso 2. Instalar pytest (una sola vez)
+### Paso 2. Crear el entorno virtual (obligatorio)
+
+**Antes de instalar las dependencias, hay que crear un entorno virtual** en la carpeta principal del proyecto. De esta manera, `pytest` se instalará para este repositorio sin modificar las dependencias de otros proyectos de Python.
+
+**Windows (PowerShell o Símbolo del sistema):**
+
+```powershell
+python -m venv .venv
+```
+
+Si en Windows el comando `python` no funciona, utilizar:
+
+```powershell
+py -m venv .venv
+```
+
+**Linux y macOS:**
+
+```bash
+python3 -m venv .venv
+```
+
+La carpeta `.venv/` se crea automáticamente dentro del proyecto. **No se debe subir a GitHub**: ya está incluida en `.gitignore`.
+
+### Paso 3. Activar el entorno virtual (obligatorio)
+
+Una vez creado, **activar el entorno desde el mismo terminal** que se utilizará para instalar y ejecutar las pruebas.
+
+**Windows — PowerShell:**
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+**Windows — Símbolo del sistema (CMD):**
+
+```bat
+.venv\Scripts\activate.bat
+```
+
+**Linux y macOS:**
+
+```bash
+source .venv/bin/activate
+```
+
+Al activarlo, normalmente aparece `(.venv)` al principio de la línea del terminal. Esto indica que los comandos `python` y `pip` utilizarán el entorno del proyecto.
+
+> **Windows y PowerShell:** si la política de ejecución bloquea `Activate.ps1`, se puede abrir un terminal **CMD** en VS Code y utilizar `.venv\Scripts\activate.bat`. No hace falta modificar las políticas de seguridad del equipo.
+
+> **Recordatorio:** cada vez que se abra un terminal nuevo para trabajar con este repositorio, habrá que **volver a activar el entorno virtual**. No es necesario crearlo otra vez.
+
+### Paso 4. Instalar las dependencias dentro del entorno virtual
+
+**Con `(.venv)` activado**, ejecutar:
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-Comprobar que está disponible:
+El archivo `requirements.txt` indica que se necesita `pytest`.
+
+### Paso 5. Comprobar que pytest funciona
 
 ```bash
 python -m pytest --version
 ```
 
+Si se muestra la versión de `pytest`, el entorno está preparado.
+
 **¿Para qué sirve?** Los ejemplos `01` a `08` solo necesitan Python. El ejemplo `09` y las pruebas de las carpetas `tests/` y `tdd/` necesitan `pytest`.
 
-> **Opcional:** es posible crear un entorno virtual con `python -m venv .venv` antes de instalar las dependencias. No es imprescindible para realizar los ejercicios.
+**A partir de aquí, todos los comandos de esta guía se ejecutan con el entorno virtual activado.**
+
+Cuando se termine de trabajar, se puede salir del entorno con:
+
+```bash
+deactivate
+```
 
 ---
 
@@ -198,7 +262,8 @@ Se puede consultar la explicación adicional en [`tdd/README.md`](tdd/README.md)
 |---|---|---|
 | `datos/` | Contiene los archivos que leen los ejemplos. | **No**, salvo en las pruebas propuestas, y después restaurar su contenido. |
 | `salidas/` | Guarda el resultado del ejemplo 04. | **No**. Puede crearse al ejecutar el programa. |
-| `requirements.txt` | Indica que hay que instalar `pytest`. | **No**. |
+| `.venv/` | Entorno virtual del proyecto: contiene su propio Python y las dependencias instaladas. | **No**. Se crea con `python -m venv .venv` y no se sube a GitHub. |
+| `requirements.txt` | Indica que hay que instalar `pytest` dentro del entorno virtual. | **No**. |
 | `pytest.ini` | Hace que la orden general de pytest busque tests en `tests/` y no ejecute automáticamente el fallo intencionado de TDD. | **No**. |
 | `Path(__file__).resolve()` | Permite encontrar los archivos del proyecto aunque cambie la ubicación de la carpeta. | **No**. |
 | `.gitignore` | Evita subir archivos temporales y otras carpetas que no forman parte de los ejemplos. | **No**. |
@@ -212,7 +277,9 @@ Se puede consultar la explicación adicional en [`tdd/README.md`](tdd/README.md)
 | Problema | Comprobación o solución |
 |---|---|
 | `python` no se reconoce | Probar `py` (Windows) o `python3` (Linux/macOS) y comprobar que Python está instalado. |
-| `No module named pytest` | Ejecutar `python -m pip install -r requirements.txt` con el mismo intérprete que se usa para probar. |
+| `No module named pytest` | Activar `.venv` y ejecutar `python -m pip install -r requirements.txt`. |
+| No aparece `(.venv)` en el terminal | Activar el entorno virtual con el comando indicado en el **paso 3**. |
+| PowerShell bloquea `Activate.ps1` | Abrir un terminal **CMD** en VS Code y activar con `.venv\Scripts\activate.bat`. |
 | `No such file or directory` al ejecutar un ejemplo | Abrir el terminal **en la raíz del proyecto**, no dentro de `ejemplos/` ni `tests/`. |
 | `1 failed` al ejecutar `tdd/01_rojo` | **Es el resultado correcto** de esa fase: se está demostrando el ciclo TDD. |
 | Fallan pruebas que deberían pasar | Comprobar que no se han modificado los archivos originales; volver a descomprimir el ZIP si fuera necesario. |
@@ -221,6 +288,8 @@ Se puede consultar la explicación adicional en [`tdd/README.md`](tdd/README.md)
 ---
 
 ## 7. Resumen de comandos para practicar
+
+**Antes de practicar**, si se ha abierto un terminal nuevo, activar `.venv` con el comando del **paso 3**.
 
 Ejecutar un ejemplo individual:
 
