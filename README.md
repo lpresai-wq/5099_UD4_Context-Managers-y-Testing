@@ -10,14 +10,14 @@ Este repositorio contiene ejemplos **independientes**. Se recomienda ejecutarlos
 
 ### Paso 1. Descargar y abrir
 
-1. Descargar el repositorio desde GitHub (**Code → Download ZIP**) o utilizar el ZIP facilitado en clase.
+1. Descargar el repositorio desde GitHub (**Code → Download ZIP**).
 2. **Descomprimirlo**, manteniendo sus carpetas y archivos.
 3. Abrir **VS Code → Archivo → Abrir carpeta** y seleccionar `5099_UD4_2_Context_Managers_y_Testing`.
 4. Abrir **Terminal → Nuevo terminal** dentro de VS Code.
 
 **Todos los comandos de esta guía se ejecutan desde la carpeta principal del proyecto**, la que contiene `README.md`, `requirements.txt` y `pytest.ini`.
 
-Para comprobar que se está en la carpeta correcta:
+Comprobar:
 
 ```bash
 python --version
@@ -268,7 +268,6 @@ Se puede consultar la explicación adicional en [`tdd/README.md`](tdd/README.md)
 | `Path(__file__).resolve()` | Permite encontrar los archivos del proyecto aunque cambie la ubicación de la carpeta. | **No**. |
 | `.gitignore` | Evita subir archivos temporales y otras carpetas que no forman parte de los ejemplos. | **No**. |
 
-**El alumnado puede centrarse en:** `with`, `try/finally`, `assert`, `raise`, `pytest`, `pytest.raises()` y las fases de TDD.
 
 ---
 
