@@ -1,0 +1,2 @@
+Esta es la primera línea del archivo de ejemplo.
+El bloque with permite leerlo y cerrarlo de forma segura.
